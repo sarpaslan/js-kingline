@@ -1,19 +1,19 @@
 {
-    "name": "template-vite",
-    "description": "A Phaser 3 template using Vite.",
-    "version": "1.2.1",
+    "name": "kingline",
+    "description": "kingline-game",
+    "version": "0.0.1",
     "type": "module",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/phaserjs/template-vite.git"
+        "url": "git+https://github.com/sarpaslan/js-kingline"
     },
-    "author": "Phaser Studio <support@phaser.io> (https://phaser.io/)",
+    "author": "sarpaslan",
     "license": "MIT",
-    "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
+    "licenseUrl": "",
     "bugs": {
-        "url": "https://github.com/phaserjs/template-vite/issues"
+        "url": "https://github.com/sarpaslan/js-kingline"
     },
-    "homepage": "https://github.com/phaserjs/template-vite#readme",
+    "homepage": "https://github.com/sarpaslan/js-kingline#readme",
     "scripts": {
         "dev": "vite --config vite/config.dev.mjs",
         "build": "vite build --config vite/config.prod.mjs"
