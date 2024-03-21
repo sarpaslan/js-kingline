@@ -1,0 +1,19 @@
+{
+  "name": "kingline",
+  "version": "0.0.1",
+  "description": "Game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel src/index.html"
+  },
+  "author": "sarpaslan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "index.js": "^0.0.3",
+    "parcel-bundler": "^1.12.5",
+    "phaser": "^3.80.1",
+    "socket.io-client": "^4.7.5"
+  }
+}
