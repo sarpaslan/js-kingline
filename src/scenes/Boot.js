@@ -1,22 +1,22 @@
-import { Scene } from 'phaser';
+import { Scene } from "phaser";
+import { socket } from "../main.js";
 
-export class Boot extends Scene
-{
-    constructor ()
-    {
-        super('Boot');
+export class Boot extends Scene {
+  constructor() {
+    super("Boot");
+  }
+  preload() {
+    this.load.image("background", "assets/bg.png");
+  }
+
+  update() {
+    if (socket.connected) {
+      this.scene.start("Preloader");
     }
-
-    preload ()
-    {
-        //  The Boot Scene is typically used to load in any assets you require for your Preloader, such as a game logo or background.
-        //  The smaller the file size of the assets, the better, as the Boot Scene itself has no preloader.
-
-        this.load.image('background', 'assets/bg.png');
-    }
-
-    create ()
-    {
-        this.scene.start('Preloader');
-    }
+  }
+  create() {
+    const text = this.add.text(innerWidth / 2, innerHeight / 2, "Connecting");
+    text.setOrigin(0.5);
+    text.setSize(100);
+  }
 }

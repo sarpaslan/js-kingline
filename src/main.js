@@ -1,28 +1,26 @@
-import { Boot } from './scenes/Boot';
-import { Game } from './scenes/Game';
-import { GameOver } from './scenes/GameOver';
-import { MainMenu } from './scenes/MainMenu';
-import { Preloader } from './scenes/Preloader';
+import { Boot } from "./scenes/Boot";
+import { Connect } from "./scenes/Connect";
+import { Preloader } from "./scenes/Preloader";
+import { World } from "./scenes/World";
 
-//  Find out more information about the Game Config at:
-//  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
+import { io } from "socket.io-client";
+
+export const socket = io("http://localhost:3000");
+socket.on("connect", () => {});
+
 const config = {
-    type: Phaser.AUTO,
-    width: 1024,
-    height: 768,
-    parent: 'game-container',
-    backgroundColor: '#028af8',
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH
-    },
-    scene: [
-        Boot,
-        Preloader,
-        MainMenu,
-        Game,
-        GameOver
-    ]
+  type: Phaser.AUTO,
+  width: innerWidth,
+  height: innerHeight,
+  parent: "game-container",
+  backgroundColor: "#018af8",
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+  },
+  scene: [Boot, Preloader, Connect, World],
+  dom: {
+    createContainer: true,
+  },
 };
-
 export default new Phaser.Game(config);
