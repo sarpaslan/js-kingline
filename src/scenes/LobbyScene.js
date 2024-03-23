@@ -8,7 +8,6 @@ export class LobbyScene extends Scene {
   }
   init(lobby) {
     this.lobby = lobby;
-    console.log(this.lobby);
   }
   preload() {
     this.load.html("lobby", "assets/dom/lobby.html");
@@ -22,5 +21,13 @@ export class LobbyScene extends Scene {
     element.getChildByID(
       "lobby-code"
     ).innerHTML = `Lobby Code: ${this.lobby.code}`;
+
+    element.getChildByID("leave").addEventListener("click", () => {
+      this.leaveLobby();
+    });
+  }
+  leaveLobby() {
+    socket.emit("leave-lobby");
+    this.scene.start("Menu");
   }
 }

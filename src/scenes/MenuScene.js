@@ -17,6 +17,9 @@ export class MenuScene extends Scene {
     socket.on("lobbies", (lobbies) => {
       console.log(lobbies);
     });
+    socket.on("lobby-not-found", () => {
+      console.log("Lobby not found");
+    });
   }
 
   preload() {
@@ -43,9 +46,10 @@ export class MenuScene extends Scene {
   }
   joinLobby(code) {
     socket.emit("join-lobby", {
-      code,
+      code: code,
       name: this.name,
     });
+    console.log("join lobby");
   }
   createLobby() {
     socket.emit("create-lobby", this.name);
