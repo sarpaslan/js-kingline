@@ -1,0 +1,60 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+width: 250px; 
+    }
+    .input-field {
+        padding: 10px;
+        font-size: 16px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 250px;
+    }.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+
+  img.avatar {
+    width: 100px;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+  <div class="imgcontainer">
+        <img src="assets/avatars/a0.png" alt="Avatar" class="avatar" />
+  <h2 id="name"></h2>
+</div>
+    <div class="container"> 
+        <input name="lobby-code" type="text" class="input-field" placeholder="Lobby Code">
+        <button name="join-lobby" class="button">Join Lobby</button>
+        <span style="margin: 25px;"></span>
+        <button name="create-lobby" class="button">Create Lobby</button>
+        <span style="margin: 5px;"></span>
+        <button name="browse-lobbies" class="button">Lobby Browser</button>
+    </div>
+</body>

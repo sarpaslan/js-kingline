@@ -1,19 +1,20 @@
 import { Scene } from "phaser";
 import { socket } from "../main.js";
 
-export class Boot extends Scene {
+export class InitScene extends Scene {
   constructor() {
-    super("Boot");
+    super("Init");
   }
   preload() {
-    this.load.image("background", "assets/bg.png");
+    this.load.html("menu", "assets/dom/menu.html");
   }
 
   update() {
     if (socket.connected) {
-      this.scene.start("Preloader");
+      this.scene.start("Login");
     }
   }
+
   create() {
     const text = this.add.text(innerWidth / 2, innerHeight / 2, "Connecting");
     text.setOrigin(0.5);

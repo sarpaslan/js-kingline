@@ -1,7 +1,7 @@
-import { Boot } from "./scenes/Boot";
-import { Connect } from "./scenes/Connect";
-import { Preloader } from "./scenes/Preloader";
-import { World } from "./scenes/World";
+import { InitScene } from "./scenes/InitScene";
+import { LobbyScene } from "./scenes/LobbyScene";
+import { LoginScene } from "./scenes/LoginScene";
+import { MenuScene } from "./scenes/MenuScene";
 
 import { io } from "socket.io-client";
 
@@ -13,12 +13,8 @@ const config = {
   width: innerWidth,
   height: innerHeight,
   parent: "game-container",
-  backgroundColor: "#018af8",
-  scale: {
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH,
-  },
-  scene: [Boot, Preloader, Connect, World],
+  backgroundColor: "#912cb0",
+  scene: [InitScene, LoginScene, MenuScene, LobbyScene],
   dom: {
     createContainer: true,
   },
