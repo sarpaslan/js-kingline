@@ -1,0 +1,30 @@
+<head>
+  <meta charset="UTF-8" />
+  <title>Countdown Screen</title>
+  <style>
+    /* CSS to make the countdown screen full screen and dim the background */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: rgba(
+        0,
+        0,
+        0,
+        0.5
+      ); /* Adjust the opacity to dim the background */
+    }
+
+    #countdown {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown">5</div>
+</body>

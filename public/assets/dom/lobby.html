@@ -36,7 +36,21 @@
       cursor: pointer;
       margin-top: 10px;
     }
-
+    .start-button {
+      background-color: rgb(174, 0, 255);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .leave-button:hover {
+      background-color: rgb(255, 80, 80);
+    }
+    .start-button:hover {
+      background-color: rgb(211, 65, 255);
+    }
     .room-code {
       font-size: 24px;
       margin-top: 20px;
@@ -46,10 +60,10 @@
 <body>
   <div class="lobby-container">
     <div class="avatar"></div>
-    <div class="scroll-view">
-      <!-- Add player avatars here -->
-    </div>
+    <div id="players" class="scroll-view"></div>
     <button id="leave" class="leave-button">Leave</button>
     <div id="lobby-code" class="room-code"></div>
+
+    <button id="start" class="start-button">Start</button>
   </div>
 </body>
