@@ -4,8 +4,6 @@ import { LobbyScene } from "./scenes/LobbyScene";
 import { LoginScene } from "./scenes/LoginScene";
 import { io } from "socket.io-client";
 
-//create a socket to localhost:3000 and send a clients language to server
-
 export const socket = io("http://localhost:3000");
 
 export const lobby = {
@@ -28,4 +26,4 @@ const config = {
     createContainer: true,
   },
 };
-export default new Phaser.Game(config);
+export const Game = new Phaser.Game(config);

@@ -5,16 +5,28 @@ export class LoginScene extends Scene {
   constructor() {
     super("Login");
   }
-
-  login(name) {
-    socket.emit("login", name);
-    socket.on("logged-in", () => {
-      this.scene.start("Game");
-    });
+  init() {
+    this.clear();
   }
-
+  clear() {
+    socket.off("logged-in");
+  }
   preload() {
     this.load.html("nameform", "assets/dom/login.html");
+  }
+  update() {
+    if (socket.disconnected) {
+      this.scene.start("Init");
+    }
+  }
+
+  login(name) {
+    console.log("is this really called by 4 times?");
+    socket.emit("login", name);
+    socket.on("logged-in", () => {
+      console.log("logged in");
+      this.scene.start("Game");
+    });
   }
 
   create() {
@@ -32,6 +44,7 @@ export class LoginScene extends Scene {
       } else {
         localStorage.setItem("name", username);
       }
+      console.log("work at time");
       this.login(username);
     });
 
@@ -43,8 +56,6 @@ export class LoginScene extends Scene {
         align: "center",
       })
       .setOrigin(0.5, 0.5);
-
-    //add image
   }
   getRandomName() {
     var names = [
