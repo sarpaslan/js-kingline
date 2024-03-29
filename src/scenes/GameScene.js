@@ -33,8 +33,13 @@ export class GameScene extends Scene {
     this.statusText.setPosition(this.canvas.width / 2, 32);
     this.createPlayers();
     if (lobby.state == "game") {
-      this.setTime(lobby.time);
-      this.onTurnChanged(lobby.currentPlayerId);
+      this.setTime(lobby.time, lobby.maxTime);
+      this.onTurnChanged(
+        {
+          time: lobby.time,
+          maxTime: lobby.maxTime,
+          currentPlayerId: lobby.currentPlayerId
+        });
     }
   }
   onPlayerJoinedLobby(player) {
@@ -61,13 +66,14 @@ export class GameScene extends Scene {
     );
   }
 
-  onTurnChanged(newPlayerId) {
-    this.currentPlayerId = newPlayerId;
+  onTurnChanged(turnData) {
+    this.currentPlayerId = turnData.currentPlayerId;
     this.updateSelectedPlayer();
-    if (newPlayerId == socket.id) {
+    this.setTime(turnData.time, turnData.maxTime);
+    if (turnData.currentPlayerId == socket.id) {
       this.statusText.text = "Your turn";
     } else {
-      var name = this.players.get(newPlayerId).name.text.split("\n")[0];
+      var name = this.players.get(turnData.currentPlayerId).name.text.split("\n")[0];
       this.statusText.text = name + "'s turn";
     }
   }
@@ -107,19 +113,25 @@ export class GameScene extends Scene {
     socket.on("start-countdown", (time) => {
       this.onStartCountdown(time);
     });
-    socket.on("start-game", (firstPlayerIndex) => {
+    socket.on("start-game", (currentPlayerId) => {
       this.statusText.text = "";
       this.animateBomb();
-      this.onTurnChanged(firstPlayerIndex);
+      this.onTurnChanged(
+        {
+          time: this.lobby.time,
+          maxTime: this.lobby.maxTime,
+          currentPlayerId: currentPlayerId
+        }
+      );
     });
-    socket.on("turn-changed", (targetId) => {
-      this.onTurnChanged(targetId);
+    socket.on("turn-changed", (turnData) => {
+      this.onTurnChanged(turnData);
     });
     socket.on("game-over", (winnerId) => {
       this.onGameOver(winnerId);
     });
     socket.on("time", (time) => {
-      this.setTime(time);
+      this.setTime(time, this.lobby.maxTime);
     });
     socket.on("heart", (res) => {
       this.players.get(res.id).name.text = this.players.get(res.id).name.text.split("\n")[0] + "\n" + "❤️️".repeat(res.heart);
@@ -133,9 +145,10 @@ export class GameScene extends Scene {
     });
   }
 
-  setTime(time) {
+  setTime(time, maxTime) {
     this.lobby.time = time;
-    this.timerFillValue = this.createRemap(0, 20, 0, 360)(time);
+    this.lobby.maxTime = maxTime;
+    this.timerFillValue = this.createRemap(0, maxTime, 0, 360)(time);
     this.drawTimeCircle(this.timerFillValue);
   }
 
@@ -230,8 +243,6 @@ export class GameScene extends Scene {
   }
 
   updateSelectedPlayer() {
-    console.log(this.players);
-    console.log(this.currentPlayerId);
     const player = this.players.get(this.currentPlayerId);
     const targetRad = Phaser.Math.Angle.Between(
       this.arrow.x,
