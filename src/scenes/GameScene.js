@@ -31,15 +31,15 @@ export class GameScene extends Scene {
     this.lobby = lobby;
     this.statusText.text = lobby.code + "|" + lobby.state;
     this.statusText.setPosition(this.canvas.width / 2, 32);
+    this.createPlayers();
     if (lobby.state == "game") {
-      this.createPlayers();
       this.setTime(lobby.time);
       this.onTurnChanged(lobby.currentPlayerId);
     }
   }
   onPlayerJoinedLobby(player) {
     this.lobby.players.push(player);
-    this.addPlayer(player);
+    this.createPlayer(player);
     this.updatePlayerPositions();
   }
   onPlayerLeftLobby(player) {
@@ -165,7 +165,6 @@ export class GameScene extends Scene {
     if (!socket.connected) {
       this.disconnected();
     }
-    if (this.timeCircle == null) return;
   }
 
   disconnected() {
@@ -284,7 +283,7 @@ export class GameScene extends Scene {
     this.players.delete(player.id);
   }
 
-  addPlayer(player) {
+  createPlayer(player) {
     let image = this.add
       .image(this.canvas.width / 2, this.canvas.height / 2, "avatar")
       .setOrigin(0.5)
@@ -312,7 +311,7 @@ export class GameScene extends Scene {
   }
   createPlayers() {
     for (let i = 0; i < this.lobby.players.length; i++) {
-      this.addPlayer(this.lobby.players[i], i);
+      this.createPlayer(this.lobby.players[i], i);
     }
     this.updatePlayerPositions();
   }
