@@ -13,6 +13,7 @@ export const lobby = {
   state: "waiting",
   currentPlayerId: -1,
   time: 20,
+  maxTime: 20,
 };
 
 const config = {
@@ -26,4 +27,5 @@ const config = {
     createContainer: true,
   },
 };
+
 export const Game = new Phaser.Game(config);

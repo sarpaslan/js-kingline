@@ -314,7 +314,7 @@ export class GameScene extends Scene {
       position: { x: 0, y: 0 },
       avatar: image,
       name: text,
-      destroy: function () {
+      destroy: function() {
         this.avatar.destroy();
         this.name.destroy();
       },
